@@ -40,6 +40,6 @@ namespace :load do
     set :asdf_roles, fetch(:asdf_roles, :all)
 
     set :asdf_ruby_dir, -> { "#{fetch(:asdf_path)}/installs/ruby/#{fetch(:asdf_ruby)}" }
-    set :asdf_map_bins, %w{bin/rake bin/gem bin/bundle bin/ruby bin/rails}
+    set :asdf_map_bins, %w{rake gem bundle ruby rails}
   end
 end
