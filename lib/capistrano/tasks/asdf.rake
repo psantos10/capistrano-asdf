@@ -16,7 +16,7 @@ namespace :asdf do
 
   task :map_bins do
     SSHKit.config.default_env.merge!({ asdf_root: fetch(:asdf_path), asdf_version: fetch(:asdf_ruby) })
-    asdf_prefix = fetch(:asdf_prefix, proc { "#{fetch(:asdf_path)}/bin/asdf exec" })
+    asdf_prefix = fetch(:asdf_prefix, proc { "#{fetch(:asdf_path)}/bin/private/asdf-exec" })
     SSHKit.config.command_map[:asdf] = "#{fetch(:asdf_path)}/bin/asdf"
 
     fetch(:asdf_map_bins).uniq.each do |command|
