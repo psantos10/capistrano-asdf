@@ -20,16 +20,16 @@ namespace :asdf do
     SSHKit.config.command_map[:asdf] = "#{fetch(:asdf_path)}/bin/asdf"
 
     SSHKit.config.command_map = Hash.new do |hash, command|
-      if (%w{rake gem bundle ruby rails}.include?(command))
+      if (%w{rake gem bundle ruby rails}.include? command.to_s)
         hash[command] = "#{asdf_prefix} bin/#{command}"
       else
         hash[command] = "/usr/bin/env #{command}"
       end
     end
 
-    fetch(:asdf_map_bins).uniq.each do |command|
-      SSHKit.config.command_map.prefix[command.to_sym].unshift(asdf_prefix)
-    end
+    #fetch(:asdf_map_bins).uniq.each do |command|
+    #  SSHKit.config.command_map.prefix[command.to_sym].unshift(asdf_prefix)
+    #end
   end
 end
 
