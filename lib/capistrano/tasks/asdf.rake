@@ -19,6 +19,10 @@ namespace :asdf do
     asdf_prefix = fetch(:asdf_prefix, proc { "#{fetch(:asdf_path)}/bin/private/asdf-exec ruby" })
     SSHKit.config.command_map[:asdf] = "#{fetch(:asdf_path)}/bin/asdf"
 
+    SSHKit.config.command_map = Hash.new do |hash, command|
+      hash[command] = "#{asdf_prefix} bin/#{command}"
+    end
+
     fetch(:asdf_map_bins).uniq.each do |command|
       SSHKit.config.command_map.prefix[command.to_sym].unshift(asdf_prefix)
     end
