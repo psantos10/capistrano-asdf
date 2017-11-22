@@ -16,7 +16,7 @@ namespace :asdf do
 
   task :map_bins do
     SSHKit.config.default_env.merge!({ asdf_root: fetch(:asdf_path), asdf_version: fetch(:asdf_ruby) })
-    asdf_prefix = fetch(:asdf_prefix, proc { "#{fetch(:asdf_path)}/bin/private/asdf-exec" })
+    asdf_prefix = fetch(:asdf_prefix, proc { "#{fetch(:asdf_path)}/bin/private/asdf-exec ruby" })
     SSHKit.config.command_map[:asdf] = "#{fetch(:asdf_path)}/bin/asdf"
 
     fetch(:asdf_map_bins).uniq.each do |command|
@@ -40,6 +40,6 @@ namespace :load do
     set :asdf_roles, fetch(:asdf_roles, :all)
 
     set :asdf_ruby_dir, -> { "#{fetch(:asdf_path)}/installs/ruby/#{fetch(:asdf_ruby)}" }
-    set :asdf_map_bins, %w{rake gem bundle ruby rails}
+    set :asdf_map_bins, %w{bin/rake bin/gem bin/bundle bin/ruby bin/rails}
   end
 end
